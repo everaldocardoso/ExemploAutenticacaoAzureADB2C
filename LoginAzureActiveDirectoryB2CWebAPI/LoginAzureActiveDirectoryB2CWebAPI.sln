@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoginAzureActiveDirectoryB2CWebAPI", "LoginAzureActiveDirectoryB2CWebAPI\LoginAzureActiveDirectoryB2CWebAPI.csproj", "{2BF7916D-7E2C-4CA0-B93E-B8044869108E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BF7916D-7E2C-4CA0-B93E-B8044869108E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BF7916D-7E2C-4CA0-B93E-B8044869108E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BF7916D-7E2C-4CA0-B93E-B8044869108E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BF7916D-7E2C-4CA0-B93E-B8044869108E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E271E02B-B081-4526-B5F3-894152875036}
+	EndGlobalSection
+EndGlobal
