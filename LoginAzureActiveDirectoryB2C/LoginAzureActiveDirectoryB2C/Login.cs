@@ -6,16 +6,14 @@ namespace LoginAzureActiveDirectoryB2C
 {
     public partial class Login : Form
     {
-        public static IPublicClientApplication PublicClientApplication;
-
-        private string clientIdWebApi = "fb847f62-7817-461d-b480-73df2e68749c";
-        private string clientId = "c5ad8d9b-011f-4f24-ae5c-83df61f4ea05";
-        private string tenantId = "cd5fe627-0485-4ba7-ae92-ff8ecbf9b336";
-        private string tenantName = "newsolucoesemsoftware";
-        private string policy = "B2C_1_susi";
-        private string urlRedirecionamento = "http://localhost";
+        private IPublicClientApplication PublicClientApplication;
         private string tipoDeToken = "Bearer";
-        private string urlWebApiClientesRestritos = "https://localhost:7220/api/ClientesRestritos";
+        private string clientId = "1f3f441f-5ee1-4573-993c-4ede45736b21";
+        private string tenantId = "b63d9676-b87d-487c-88b7-16c78cb62a3e";
+        private string urlRedirecionamento = "http://localhost";        
+        private string urlWebApiClientesRestritos = "https://localhost:5001/api/v1/Teste";
+        private string urlEscopo = "https://fibrasiltn.onmicrosoft.com/fibrasil-it-sit-frontend-portal-tenants/user_impersonation";
+        private string urlAutoridade = "https://login.microsoftonline.com/{0}/oauth2/v2.0/";
 
         public Login()
         {
@@ -23,10 +21,24 @@ namespace LoginAzureActiveDirectoryB2C
 
             PublicClientApplication = PublicClientApplicationBuilder
                 .Create(clientId)
-                .WithB2CAuthority($"https://{tenantName}.b2clogin.com/tfp/{tenantId}/{policy}")                  
+                .WithB2CAuthority(string.Format(urlAutoridade, tenantId))
                 .WithRedirectUri(urlRedirecionamento)
-                .WithDefaultRedirectUri()                
+                .WithDefaultRedirectUri()
                 .Build();
+        }
+
+        private async Task<AuthenticationResult> SingIn()
+        {
+            return await PublicClientApplication
+                    .AcquireTokenInteractive(new List<string>() { urlEscopo }.ToList())
+                    .ExecuteAsync();
+        }
+
+        private async Task<HttpResponseMessage> ObterDadosAPIPropria(string token)
+        {
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tipoDeToken, token);
+            return await httpClient.GetAsync(urlWebApiClientesRestritos);
         }
 
         private async void btnFazerLogin_Click(object sender, EventArgs e)
@@ -38,34 +50,10 @@ namespace LoginAzureActiveDirectoryB2C
                 txtRetorno.Text = httpResponse.StatusCode.ToString();
                 txtRetorno.Text += "\n\n" + httpResponse.Content.ReadAsStringAsync().Result.ToString();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private async Task<AuthenticationResult> SingIn()
-        {
-            return await PublicClientApplication
-                    .AcquireTokenInteractive(ObterEscopos())
-                    .ExecuteAsync();
-        }
-
-        private async Task<HttpResponseMessage> ObterDadosAPIPropria(string token)
-        {
-            var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tipoDeToken, token);
-            return await httpClient.GetAsync(urlWebApiClientesRestritos);            
-        }
-
-        private List<string> ObterEscopos()
-        {
-            var urlbase = $"https://{tenantName}.onmicrosoft.com/{clientIdWebApi}";
-            return new List<string>()
-            {
-                $"{urlbase}/read",
-                $"{urlbase}/write"
-            }.ToList();
         }
     }
 }
