@@ -8,8 +8,8 @@ namespace LoginAzureActiveDirectoryB2CWebAPI.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
-    [RequiredScope("read")]
+    [Route("api/v1/[controller]")]
+    [RequiredScope("user_impersonation")]
     public class ClientesRestritosController : ControllerBase
     {
         private List<Cliente> Clientes { get; }
