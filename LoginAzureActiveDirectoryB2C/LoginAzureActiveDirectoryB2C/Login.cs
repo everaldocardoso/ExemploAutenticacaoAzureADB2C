@@ -46,9 +46,10 @@ namespace LoginAzureActiveDirectoryB2C
             try
             {
                 var authResult = await SingIn();
-                var httpResponse = await ObterDadosAPIPropria(authResult.AccessToken);
-                txtRetorno.Text = httpResponse.StatusCode.ToString();
-                txtRetorno.Text += "\n\n" + httpResponse.Content.ReadAsStringAsync().Result.ToString();
+                //var httpResponse = await ObterDadosAPIPropria(authResult.AccessToken);
+                txtRetorno.Clear();
+                txtRetorno.Text = authResult.AccessToken;
+                //txtRetorno.Text += "\n\n" + httpResponse.Content.ReadAsStringAsync().Result.ToString();
             }
             catch (Exception ex)
             {
