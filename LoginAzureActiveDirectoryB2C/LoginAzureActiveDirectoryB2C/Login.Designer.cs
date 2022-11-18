@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.btnFazerLogin = new System.Windows.Forms.Button();
             this.txtRetorno = new System.Windows.Forms.TextBox();
             this.btnCopiar = new System.Windows.Forms.Button();
@@ -168,7 +169,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(969, 503);
+            this.ClientSize = new System.Drawing.Size(969, 506);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtAutoridade);
             this.Controls.Add(this.label4);
@@ -182,10 +183,9 @@
             this.Controls.Add(this.btnCopiar);
             this.Controls.Add(this.txtRetorno);
             this.Controls.Add(this.btnFazerLogin);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Login";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Obter Token Azure AD";
             this.ResumeLayout(false);
