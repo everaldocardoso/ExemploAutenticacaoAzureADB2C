@@ -123,9 +123,9 @@
             // 
             this.nudTimer.Location = new System.Drawing.Point(481, 25);
             this.nudTimer.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
+            268435455,
+            1042612833,
+            542101086,
             0});
             this.nudTimer.Name = "nudTimer";
             this.nudTimer.Size = new System.Drawing.Size(159, 23);
