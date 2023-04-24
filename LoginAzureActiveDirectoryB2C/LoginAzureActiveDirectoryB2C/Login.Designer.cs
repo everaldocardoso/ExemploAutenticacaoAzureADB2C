@@ -28,20 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.btnFazerLogin = new System.Windows.Forms.Button();
             this.txtRetorno = new System.Windows.Forms.TextBox();
             this.btnCopiar = new System.Windows.Forms.Button();
-            this.txtClienteId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtTenantID = new System.Windows.Forms.TextBox();
+            this.lblTempo = new System.Windows.Forms.Label();
+            this.cboEnviroment = new System.Windows.Forms.ComboBox();
+            this.nudTimer = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtURLRedirecionamento = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtEscopo = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtAutoridade = new System.Windows.Forms.TextBox();
+            this.tmrTickTac = new System.Windows.Forms.Timer(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.nudTimer)).BeginInit();
             this.SuspendLayout();
             // 
             // btnFazerLogin
@@ -51,9 +50,9 @@
             this.btnFazerLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFazerLogin.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnFazerLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnFazerLogin.Location = new System.Drawing.Point(9, 113);
+            this.btnFazerLogin.Location = new System.Drawing.Point(503, 20);
             this.btnFazerLogin.Name = "btnFazerLogin";
-            this.btnFazerLogin.Size = new System.Drawing.Size(718, 29);
+            this.btnFazerLogin.Size = new System.Drawing.Size(224, 29);
             this.btnFazerLogin.TabIndex = 0;
             this.btnFazerLogin.Text = "FAZER LOGIN";
             this.btnFazerLogin.UseVisualStyleBackColor = false;
@@ -61,7 +60,7 @@
             // 
             // txtRetorno
             // 
-            this.txtRetorno.Location = new System.Drawing.Point(9, 148);
+            this.txtRetorno.Location = new System.Drawing.Point(-3, 57);
             this.txtRetorno.Multiline = true;
             this.txtRetorno.Name = "txtRetorno";
             this.txtRetorno.ReadOnly = true;
@@ -76,7 +75,7 @@
             this.btnCopiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCopiar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnCopiar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnCopiar.Location = new System.Drawing.Point(733, 113);
+            this.btnCopiar.Location = new System.Drawing.Point(733, 20);
             this.btnCopiar.Name = "btnCopiar";
             this.btnCopiar.Size = new System.Drawing.Size(224, 29);
             this.btnCopiar.TabIndex = 3;
@@ -84,102 +83,82 @@
             this.btnCopiar.UseVisualStyleBackColor = false;
             this.btnCopiar.Click += new System.EventHandler(this.btnCopiar_Click);
             // 
-            // txtClienteId
-            // 
-            this.txtClienteId.Location = new System.Drawing.Point(9, 33);
-            this.txtClienteId.Name = "txtClienteId";
-            this.txtClienteId.Size = new System.Drawing.Size(222, 23);
-            this.txtClienteId.TabIndex = 4;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(12, 407);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 15);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Cliente ID";
+            this.label1.Size = new System.Drawing.Size(279, 15);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Tempo  de espera para cancelamento (segundos):";
             // 
-            // label2
+            // lblTempo
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(240, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 15);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Tenant ID";
+            this.lblTempo.AutoSize = true;
+            this.lblTempo.Location = new System.Drawing.Point(290, 407);
+            this.lblTempo.Name = "lblTempo";
+            this.lblTempo.Size = new System.Drawing.Size(38, 15);
+            this.lblTempo.TabIndex = 5;
+            this.lblTempo.Text = "label2";
             // 
-            // txtTenantID
+            // cboEnviroment
             // 
-            this.txtTenantID.Location = new System.Drawing.Point(237, 33);
-            this.txtTenantID.Name = "txtTenantID";
-            this.txtTenantID.Size = new System.Drawing.Size(230, 23);
-            this.txtTenantID.TabIndex = 6;
+            this.cboEnviroment.FormattingEnabled = true;
+            this.cboEnviroment.Location = new System.Drawing.Point(12, 25);
+            this.cboEnviroment.Name = "cboEnviroment";
+            this.cboEnviroment.Size = new System.Drawing.Size(322, 23);
+            this.cboEnviroment.TabIndex = 6;
+            // 
+            // nudTimer
+            // 
+            this.nudTimer.Location = new System.Drawing.Point(340, 25);
+            this.nudTimer.Name = "nudTimer";
+            this.nudTimer.Size = new System.Drawing.Size(159, 23);
+            this.nudTimer.TabIndex = 7;
+            this.nudTimer.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.nudTimer.ValueChanged += new System.EventHandler(this.nudTimer_ValueChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(476, 15);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(340, 7);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(128, 15);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "URL Redirecionamento";
-            // 
-            // txtURLRedirecionamento
-            // 
-            this.txtURLRedirecionamento.Location = new System.Drawing.Point(473, 33);
-            this.txtURLRedirecionamento.Name = "txtURLRedirecionamento";
-            this.txtURLRedirecionamento.Size = new System.Drawing.Size(484, 23);
-            this.txtURLRedirecionamento.TabIndex = 8;
+            this.label3.Size = new System.Drawing.Size(146, 15);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Aguardar por (segundos):";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(473, 65);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(12, 7);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 15);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Escopo";
+            this.label4.Size = new System.Drawing.Size(65, 15);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Ambiente:";
             // 
-            // txtEscopo
+            // tmrTickTac
             // 
-            this.txtEscopo.Location = new System.Drawing.Point(473, 81);
-            this.txtEscopo.Name = "txtEscopo";
-            this.txtEscopo.Size = new System.Drawing.Size(484, 23);
-            this.txtEscopo.TabIndex = 10;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 63);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 15);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Autoridade";
-            // 
-            // txtAutoridade
-            // 
-            this.txtAutoridade.Location = new System.Drawing.Point(9, 81);
-            this.txtAutoridade.Name = "txtAutoridade";
-            this.txtAutoridade.Size = new System.Drawing.Size(458, 23);
-            this.txtAutoridade.TabIndex = 12;
+            this.tmrTickTac.Tick += new System.EventHandler(this.tmrTickTac_Tick);
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(969, 506);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtAutoridade);
+            this.ClientSize = new System.Drawing.Size(969, 432);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtEscopo);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtURLRedirecionamento);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtTenantID);
+            this.Controls.Add(this.nudTimer);
+            this.Controls.Add(this.cboEnviroment);
+            this.Controls.Add(this.lblTempo);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtClienteId);
             this.Controls.Add(this.btnCopiar);
             this.Controls.Add(this.txtRetorno);
             this.Controls.Add(this.btnFazerLogin);
@@ -188,6 +167,7 @@
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Obter Token Azure AD";
+            ((System.ComponentModel.ISupportInitialize)(this.nudTimer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,15 +178,12 @@
         private Button btnFazerLogin;
         private TextBox txtRetorno;
         private Button btnCopiar;
-        private TextBox txtClienteId;
         private Label label1;
-        private Label label2;
-        private TextBox txtTenantID;
+        private Label lblTempo;
+        private ComboBox cboEnviroment;
+        private NumericUpDown nudTimer;
         private Label label3;
-        private TextBox txtURLRedirecionamento;
         private Label label4;
-        private TextBox txtEscopo;
-        private Label label5;
-        private TextBox txtAutoridade;
+        private System.Windows.Forms.Timer tmrTickTac;
     }
 }
