@@ -1,6 +1,11 @@
 
 using LoginAzureActiveDirectoryB2C.Model;
 using Microsoft.Identity.Client;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace LoginAzureActiveDirectoryB2C
 {
@@ -12,7 +17,7 @@ namespace LoginAzureActiveDirectoryB2C
         {
             InitializeComponent();
             cboEnviroment.DataSource = LoadingDataEnviroment();
-            lblTempo.Text = nudTimer.Value.ToString();            
+            lblTempo.Text = nudTimer.Value.ToString();
         }
 
         private List<Ambiente> LoadingDataEnviroment()
@@ -58,7 +63,7 @@ namespace LoginAzureActiveDirectoryB2C
             tmrTickTac.Interval = 1000;
             tmrTickTac.Start();
             try
-            {                
+            {
                 var cancellationToken = new CancellationTokenSource();
                 cancellationToken.CancelAfter(Convert.ToInt32(nudTimer.Value * 1000m));
 
@@ -79,7 +84,7 @@ namespace LoginAzureActiveDirectoryB2C
             {
                 tmrTickTac.Stop();
                 MessageBox.Show("Operação cancelada por atingir o tempo limite.");
-                
+
             }
             catch (Exception ex)
             {
@@ -112,6 +117,17 @@ namespace LoginAzureActiveDirectoryB2C
                 txtRetorno.Clear();
                 var authResult = await SingIn(enviroment);
                 txtRetorno.Text = authResult?.AccessToken;
+
+                if (string.IsNullOrEmpty(txtRetorno.Text))
+                {
+                    try
+                    {
+                        txtRetornoDetalhes.Text = new JwtSecurityTokenHandler().ReadToken(txtRetorno.Text).ToString();
+                    }
+                    catch
+                    {
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -140,6 +156,22 @@ namespace LoginAzureActiveDirectoryB2C
             Application.DoEvents();
         }
 
+        private void btnCopiarDetalhes_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtRetornoDetalhes.Text))
+            {
+                MessageBox.Show("Não há dados para copiar.");
+                return;
+            }
+
+            Clipboard.SetText(txtRetornoDetalhes.Text);
+            btnCopiarDetalhes.Text = "COPIADO!";
+            Application.DoEvents();
+            Thread.Sleep(3000);
+            btnCopiarDetalhes.Text = "COPIAR";
+            Application.DoEvents();
+        }
+
         private void nudTimer_ValueChanged(object sender, EventArgs e)
         {
             lblTempo.Text = nudTimer.Value.ToString();
@@ -149,6 +181,31 @@ namespace LoginAzureActiveDirectoryB2C
         {
             lblTempo.Text = (--timer).ToString();
             Application.DoEvents();
+        }
+
+        private void txtRetorno_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtRetorno.Text))
+            {
+                txtRetornoDetalhes.Clear();
+            }
+            else
+            {
+                try
+                {
+                    txtRetornoDetalhes.Text = new JwtSecurityTokenHandler().ReadToken(txtRetorno.Text).ToString();
+                }
+                catch
+                {
+                }
+            }           
+        }
+
+        private void chkHabilitarEdicao_CheckedChanged(object sender, EventArgs e)
+        {
+            txtRetorno.ReadOnly = !chkHabilitarEdicao.Checked;
+            txtRetorno.Clear();
+            txtRetornoDetalhes.Clear();
         }
     }
 }
