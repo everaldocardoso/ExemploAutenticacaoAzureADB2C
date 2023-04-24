@@ -46,6 +46,7 @@
             this.chkHabilitarEdicao = new System.Windows.Forms.CheckBox();
             this.btnCopiarDetalhes = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnRecarregar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudTimer)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -57,9 +58,9 @@
             this.btnFazerLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFazerLogin.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnFazerLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnFazerLogin.Location = new System.Drawing.Point(646, 19);
+            this.btnFazerLogin.Location = new System.Drawing.Point(768, 19);
             this.btnFazerLogin.Name = "btnFazerLogin";
-            this.btnFazerLogin.Size = new System.Drawing.Size(318, 29);
+            this.btnFazerLogin.Size = new System.Drawing.Size(206, 29);
             this.btnFazerLogin.TabIndex = 0;
             this.btnFazerLogin.Text = "FAZER LOGIN";
             this.btnFazerLogin.UseVisualStyleBackColor = false;
@@ -231,12 +232,28 @@
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             // 
+            // btnRecarregar
+            // 
+            this.btnRecarregar.BackColor = System.Drawing.Color.White;
+            this.btnRecarregar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnRecarregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRecarregar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnRecarregar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnRecarregar.Location = new System.Drawing.Point(646, 19);
+            this.btnRecarregar.Name = "btnRecarregar";
+            this.btnRecarregar.Size = new System.Drawing.Size(116, 29);
+            this.btnRecarregar.TabIndex = 16;
+            this.btnRecarregar.Text = "RECARREGAR";
+            this.btnRecarregar.UseVisualStyleBackColor = false;
+            this.btnRecarregar.Click += new System.EventHandler(this.btnRecarregar_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(981, 682);
+            this.Controls.Add(this.btnRecarregar);
             this.Controls.Add(this.chkHabilitarEdicao);
             this.Controls.Add(this.txtRetornoDetalhes);
             this.Controls.Add(this.label4);
@@ -277,5 +294,6 @@
         private CheckBox chkHabilitarEdicao;
         private Button btnCopiarDetalhes;
         private GroupBox groupBox1;
+        private Button btnRecarregar;
     }
 }

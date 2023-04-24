@@ -1,11 +1,9 @@
 
 using LoginAzureActiveDirectoryB2C.Model;
 using Microsoft.Identity.Client;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.IdentityModel.Tokens.Jwt;
-using System.Text;
 
 namespace LoginAzureActiveDirectoryB2C
 {
@@ -16,8 +14,43 @@ namespace LoginAzureActiveDirectoryB2C
         public Login()
         {
             InitializeComponent();
-            cboEnviroment.DataSource = LoadingDataEnviroment();
+            CreateArchiveConfig();
+            ReadArchiveConfig();
             lblTempo.Text = nudTimer.Value.ToString();
+        }
+
+        private void CreateArchiveConfig()
+        {
+            var pathFile = $"{Directory.GetCurrentDirectory()}\\config.json";
+            if (!File.Exists(pathFile))
+            {
+                var serealized = JsonConvert.SerializeObject
+                (
+                    LoadingDataEnviroment(),
+                    Formatting.Indented,
+                    new JsonSerializerSettings
+                    {
+                        ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    }
+                );
+
+                File.WriteAllText($"{Directory.GetCurrentDirectory()}\\config.json", serealized);
+            }            
+        }
+
+        private void ReadArchiveConfig()
+        {
+            var pathFile = $"{Directory.GetCurrentDirectory()}\\config.json";
+            if (File.Exists(pathFile))
+            {
+                var file = File.ReadAllText(pathFile);
+                if (!string.IsNullOrEmpty(file))
+                {
+                    cboEnviroment.DataSource = JsonConvert.DeserializeObject<List<Ambiente>>(file);
+                    return;
+                }
+            }
+            cboEnviroment.DataSource = LoadingDataEnviroment();
         }
 
         private List<Ambiente> LoadingDataEnviroment()
@@ -206,6 +239,12 @@ namespace LoginAzureActiveDirectoryB2C
             txtRetorno.ReadOnly = !chkHabilitarEdicao.Checked;
             txtRetorno.Clear();
             txtRetornoDetalhes.Clear();
+        }
+
+        private void btnRecarregar_Click(object sender, EventArgs e)
+        {
+            ReadArchiveConfig();
+            Application.DoEvents();
         }
     }
 }
